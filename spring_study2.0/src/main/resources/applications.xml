@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans
+https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 新增这里  -->
+    <bean id="myName" class="java.lang.String">
+        <constructor-arg value="鸭子1号" />
+    </bean>
+
+    <bean id="duck1" class="Zero.ioc.Duck">
+       <!--<property name="name" ref="myName"></property>-->
+        <constructor-arg ref = "myName"></constructor-arg>
+        <property name="age" value="20"></property>
+    </bean>
+
+    <bean id="duck2" class="Zero.ioc.Duck">
+        <property name="name" value="鸭子2号"></property>
+        <property name="age" value="30"></property>
+    </bean>
+
+    <bean id="duckFactor" class="Zero.ioc.DuckFactory"></bean>
+    <bean id="duck3" class="Zero.ioc.Duck" factory-bean="duckFactor" factory-method="creat">
+        <property name="age" value="25"></property>
+    </bean>
+
+    <bean id="duck4" class="Zero.ioc.DuckFactory" factory-method="creat2">
+        <property name="age" value="13"></property>
+    </bean>
+    <bean id="duckshop" class="Zero.ioc.DuckShop" >
+        <property name="name" value="北京烤鸭店"></property>
+        <property name="ducks">
+            <list>
+                <ref bean="duck1"></ref>
+                <ref bean="duck2"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="Zero.scan"></context:component-scan>
+
+</beans>
