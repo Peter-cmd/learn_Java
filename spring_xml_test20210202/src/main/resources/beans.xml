@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+https://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--使用带参构造方法实例化bean-->
+    <bean id="user1" class="zero.model.User">
+        <constructor-arg name="id" value="1"/>
+        <constructor-arg name="name" value="李华"/>
+        <property name="focus">
+            <list>
+                <ref bean="user2"/>
+                <ref bean="user3"/>
+                <ref bean="user4"/>
+                <ref bean="user5"/>
+                <ref bean="user6"/>
+            </list>
+        </property>
+    </bean>
+    <!--使用带参构造方法实例化bean-->
+    <bean id="user2" class="zero.model.User">
+        <constructor-arg name="id" value="2"/>
+        <constructor-arg name="name" value="刘丽"/>
+        <property name="boyFriend" ref="user1"/>
+        <property name="followers">
+            <set>
+                <ref bean="user1"/>
+                <ref bean="user3"/>
+                <ref bean="user4"/>
+                <ref bean="user5"/>
+                <ref bean="user6"/>
+            </set>
+        </property>
+    </bean>
+    <!--使用带参构造方法实例化bean-->
+    <bean id="user3" class="zero.model.User" >
+        <constructor-arg name="id" value="3"/>
+        <constructor-arg name="name" value="王刚"/>
+    </bean>
+    <!--使用无参构造方法实例化bean-->
+    <bean id="user4" class="zero.model.User">
+        <property name="id" value="4"/>
+        <property name="name" value="赵丽"/>
+    </bean>
+    <!--使用静态工厂方法实例化bean-->
+    <bean id="user5" class="zero.factory.UserFactory" factory-method="sCreateUser"/>
+    <!--使用实例工厂方法实例化bean-->
+    <bean id="userFactory" class="zero.factory.UserFactory"/>
+    <bean id="user6" class="zero.factory.UserFactory" factory-bean="userFactory" factory-method="iCreateUser"/>
+</beans>
