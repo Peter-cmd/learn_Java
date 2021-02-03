@@ -1,0 +1,14 @@
+.list{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.book_list{
+    font-size: 3em;
+}
+
+button{
+    font-size: 3em;
+}
